@@ -1,0 +1,32 @@
+{
+    "name": "dwmsw/sagepay",
+    "type": "library",
+    "description": "Sagepay integration",
+    "keywords":  [
+        "gateway",
+        "merchant",
+        "pay",
+        "payment",
+        "purchase",
+        "sage pay",
+        "sagepay"
+    ],
+    "homepage": "https://github.com/dwmsw/sagepay",
+    "license": "GPLv3",
+    "authors": [
+        {
+            "name": "Daryll Doyle",
+            "email": "daryll@enshrined.co.uk",
+            "homepage": "http://enshrined.co.uk",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "PSR-4": {
+            "dwmsw\\sagepay\\": "src/"
+        }
+    }
+}
