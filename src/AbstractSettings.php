@@ -50,7 +50,7 @@ class AbstractSettings
      *
      * @var string
      */
-    protected $mode = null;
+    protected $mode = 'live';
 
     /**
      * Set this value for callback url called by PayPal

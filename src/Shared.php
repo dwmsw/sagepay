@@ -28,6 +28,15 @@ class Shared extends AbstractSettings
     }
 
     /**
+     * Gets the connection mode to the API
+     * @return string Connection Mode
+     */
+    public function getConnectionMode()
+    {
+        return $this->mode;
+    }
+
+    /**
      * Get vendor name provided by Sagepay service
      *
      * @return string  Vendor name
@@ -66,7 +75,7 @@ class Shared extends AbstractSettings
     {
         $currencies = Utilities::getCountryCodes();
 
-        if(isset($currencies[$currency])) {
+        if (isset($currencies[$currency])) {
             $this->currency = $currency;
         } else {
             throw new \InvalidArgumentException("Invalid currency code, ISO 4217 Expected" . $currency . " given");
