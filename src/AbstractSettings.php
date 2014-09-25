@@ -24,11 +24,11 @@ class AbstractSettings
     protected $currency = null;
 
     /**
-     * The vendor code to be used with Sagepay
+     * The vendor name to be used with Sagepay
      *
      * @var string
      */
-    protected $vendorCode = null;
+    protected $vendorName = null;
 
     /**
      * The method to be used to access the Sagepay API
