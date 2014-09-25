@@ -20,10 +20,10 @@ class Shared extends AbstractSettings
             $this->mode = $mode;
         } else {
             // Supplied connection mode not supported.
-            throw new \Exception("Invalid connection mode name '{$mode}'");
+            throw new \InvalidArgumentException("Invalid connection mode name '{$mode}'");
         }
 
-        return $this;
+        return true;
     }
 
 }
