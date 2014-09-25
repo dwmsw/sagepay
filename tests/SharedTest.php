@@ -26,4 +26,15 @@ class SharedTest extends PHPUnit_Framework_TestCase
         $this->assertTrue($return);
         
     }
+
+    public function testVendorName()
+    {
+        $shared = new dwmsw\sagepay\Shared();
+
+        $shared->setVendorName('vendorname');
+
+        $vendorName = $shared->getVendorName();
+
+        $this->assertEquals($vendorName, 'vendorname');
+    }
 }

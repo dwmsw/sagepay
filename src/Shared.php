@@ -26,4 +26,24 @@ class Shared extends AbstractSettings
         return true;
     }
 
+    /**
+     * Get vendor name provided by Sagepay service
+     *
+     * @return string  Vendor name
+     */
+    public function getVendorName()
+    {
+        return $this->vendorName;
+    }
+
+    /**
+     * Set vendor name provided by Sagepay service
+     *
+     * @param string $vendorName Vendor name
+     */
+    public function setVendorName($vendorName)
+    {
+        $this->vendorName = $vendorName;
+    }
+
 }
