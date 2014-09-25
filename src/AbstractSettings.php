@@ -1,6 +1,6 @@
 <?php
 
-namespace dwmsw\sagePay;
+namespace dwmsw\sagepay;
 
 class AbstractSettings
 {
