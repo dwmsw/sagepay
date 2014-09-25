@@ -2,7 +2,7 @@
 
 namespace dwmsw\sagePay;
 
-class DirectGateway 
+class Direct
 {
 
 }
