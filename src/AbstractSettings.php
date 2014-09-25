@@ -57,7 +57,7 @@ class AbstractSettings
      *
      * @var string
      */
-    private $paypalCallbackUrl = '';
+    protected $paypalCallbackUrl = '';
 
     /**
      * Which type of Sagepay account is to be used
