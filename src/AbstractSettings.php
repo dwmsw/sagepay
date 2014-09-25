@@ -2,7 +2,7 @@
 
 namespace dwmsw\sagePay;
 
-class Direct extends Shared
+class AbstractSettings
 {
 
 }
