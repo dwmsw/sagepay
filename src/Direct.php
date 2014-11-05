@@ -85,21 +85,6 @@ class Direct extends Shared
             $data['PayPalCallbackURL'] = $this->PayPalCallbackURL;
         }
 
-        var_dump($data);
-
-//        if (sizeof($this->Basket)) {
-//            $data['Basket'] = count($this->Basket);
-//            foreach($this->Basket as $line) {
-//                $data['Basket'] .= ':' . $line['description'];
-//                $data['Basket'] .= ':' . $line['quantity'];
-//                $data['Basket'] .= ':' . number_format($line['value'], 2, '.', '');
-//                $data['Basket'] .= ':' . number_format($line['tax'], 2, '.', '');
-//                $data['Basket'] .= ':' . number_format(($line['value'] + $line['tax']), 2, '.', '');
-//                $data['Basket'] .= ':' . number_format(($line['quantity'] * ($line['value'] + $line['tax'])), 2, '.', '');
-//            }
-//        }
-//
-//        $this->result = $this->requestPost($this->urls['register'], $this->formatData($data));
-
+        return $this->makeRequest($this->directEndPoints[$this->mode]['register'], $data);
     }
 }

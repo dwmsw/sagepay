@@ -295,11 +295,7 @@ class Shared extends AbstractSettings
             'body' => $data
         ]);
 
-        var_dump($response->getHeader('content-type'));
-
-        var_dump($response->getBody()->getStream());
-
-        return $response;
+        return $response->getBody()->getContents();
     }
 
 }
