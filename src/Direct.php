@@ -73,7 +73,7 @@ class Direct extends Shared
             'CustomerEmail'      => $this->customerEmail,
             'GiftAidPayment'     => $this->giftAid,
             'AccountType'        => $this->accountType,
-            'ClientIPAddress'    => $_SERVER['REMOTE_ADDR'],
+            'ClientIPAddress'    => ($_SERVER['REMOTE_ADDR'] == '::1' ? '127.0.0.1' : $_SERVER['REMOTE_ADDR']),
             'ApplyAVSCV2'        => $this->applyAvsCv2,
             'Apply3DSecure'      => $this->apply3dSecure,
 
