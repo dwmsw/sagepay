@@ -130,10 +130,10 @@ class Basket
 
             $node->appendChild($dom->createElement('description', $item->getDescription()));
             $node->appendChild($dom->createElement('quantity', $item->getQuantity()));
-            $node->appendChild($dom->createElement('unitNetAmount', $item->getUnitNetAmount()));
-            $node->appendChild($dom->createElement('unitTaxAmount', $item->getUnitTaxAmount()));
-            $node->appendChild($dom->createElement('unitGrossAmount', $item->getUnitGrossAmount()));
-            $node->appendChild($dom->createElement('TotalGrossAmount', $item->getTotalGrossAmount()));
+            $node->appendChild($dom->createElement('unitNetAmount', number_format($item->getUnitNetAmount(), 2, '.', '')));
+            $node->appendChild($dom->createElement('unitTaxAmount', number_format($item->getUnitTaxAmount(), 2, '.', '')));
+            $node->appendChild($dom->createElement('unitGrossAmount', number_format($item->getUnitGrossAmount(), 2, '.', '')));
+            $node->appendChild($dom->createElement('totalGrossAmount', number_format($item->getTotalGrossAmount(), 2, '.', '')));
 
             if ($tmp = $item->getProductSku()) {
                 $node->appendChild($dom->createElement('productSKU', $tmp));
@@ -158,6 +158,6 @@ class Basket
             $dom->documentElement->appendChild($dom->createElement('deliveryGrossAmount', $tmp));
         }
 
-        return $dom->saveXML($dom);
+        return $dom->saveXML($dom->documentElement);
     }
 }
