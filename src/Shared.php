@@ -295,7 +295,14 @@ class Shared extends AbstractSettings
             'body' => $data
         ]);
 
-        return $response->getBody()->getContents();
+        $output =  explode(PHP_EOL, $response->getBody());
+
+        foreach ($output as $out) {
+            $parts = explode('=', $out);
+            $this->response[$parts[0]] = $parts[1];
+        }
+
+        return $this->response;
     }
 
 }

@@ -141,6 +141,13 @@ class AbstractSettings
     protected $card;
 
     /**
+     * Sagepay Response
+     *
+     * @var
+     */
+    protected $response;
+
+    /**
      * An array holding the endpoints available to the Direct API
      *
      * @var array
