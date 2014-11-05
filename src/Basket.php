@@ -32,13 +32,13 @@ class Basket
      */
     public function addItem(Item $item) 
     {
-        $items[] = $item;
+        $this->items[] = $item;
     }
 
     /**
      * Get delivery net amount
      *
-     * @return type
+     * @return float
      */
     public function getDeliveryNetAmount()
     {
@@ -100,47 +100,64 @@ class Basket
         return $amount;
     }
 
+    public function getItems($xml = false)
+    {   
+        if ($xml === false) {
+            return $this->items;
+        } else {
+            return $this->toXml();
+        }
+    }
+
     /**
      * Export Basket as XML
      *
      * @return string
      */
-    private function _toXml()
+    private function toXml()
     {
-        $dom = new DOMDocument();
-        $dom->formatOutput = false;
+        $dom = new \DOMDocument();
+        $dom->formatOutput = true;
         $dom->loadXML('<basket></basket>');
-        foreach ($this->_exportFields as $name)
-        {
+        foreach ($this->getItems() as $item) {
             $value = NULL;
-            $getter = "get" . ucfirst($name);
-            if (method_exists($this, $getter))
-            {
-                $value = $this->$getter();
-            }
 
-            if (empty($value))
-            {
+            if ($item->getQuantity() <= 0) {
                 continue;
             }
 
-            $node = $this->_createDomNode($dom, $value, $name);
-            if ($node instanceof DOMNode)
-            {
-                $dom->documentElement->appendChild($node);
+            $node = $dom->createElement('item');
+
+            $node->appendChild($dom->createElement('description', $item->getDescription()));
+            $node->appendChild($dom->createElement('quantity', $item->getQuantity()));
+            $node->appendChild($dom->createElement('unitNetAmount', $item->getUnitNetAmount()));
+            $node->appendChild($dom->createElement('unitTaxAmount', $item->getUnitTaxAmount()));
+            $node->appendChild($dom->createElement('unitGrossAmount', $item->getUnitGrossAmount()));
+            $node->appendChild($dom->createElement('TotalGrossAmount', $item->getTotalGrossAmount()));
+
+            if ($tmp = $item->getProductSku()) {
+                $node->appendChild($dom->createElement('productSKU', $tmp));
             }
-            else if ($node instanceof DOMNodeList)
-            {
-                for ($i = 0, $n = $node->length; $i < $n; $i++)
-                {
-                    $child = $node->item(0);
-                    if ($child instanceof DOMNode)
-                    {
-                        $dom->documentElement->appendChild($child);
-                    }
-                }
+
+            if ($tmp = $item->getProductCode()) {
+                $node->appendChild($dom->createElement('productCode', $tmp));
             }
+
+            $dom->documentElement->appendChild($node);
         }
-        return $dom->saveXML($dom->documentElement);
+
+        if ($this->deliveryNetAmount) {
+            $dom->documentElement->appendChild($dom->createElement('deliveryNetAmount', $this->deliveryNetAmount));
+        }
+
+        if ($this->deliveryTaxAmount) {
+            $dom->documentElement->appendChild($dom->createElement('deliveryTaxAmount', $this->deliveryTaxAmount));
+        }
+
+        if ($tmp = $this->getDeliveryGrossAmount()) {
+            $dom->documentElement->appendChild($dom->createElement('deliveryGrossAmount', $tmp));
+        }
+
+        return $dom->saveXML($dom);
     }
 }
