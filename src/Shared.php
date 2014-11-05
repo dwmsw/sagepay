@@ -280,4 +280,26 @@ class Shared extends AbstractSettings
         $this->card = $card;
     }
 
+
+    /**
+     * Make a request to sagepay
+     * @param       $url
+     * @param array $data
+     * @return mixed
+     */
+    protected function makeRequest($url, array $data)
+    {
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->post($url, [
+            'body' => $data
+        ]);
+
+        var_dump($response->getHeader('content-type'));
+
+        var_dump($response->getBody()->getStream());
+
+        return $response;
+    }
+
 }
