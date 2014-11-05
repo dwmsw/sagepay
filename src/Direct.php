@@ -78,7 +78,7 @@ class Direct extends Shared
             'Apply3DSecure'      => $this->apply3dSecure,
 
             // Basket
-            'Basket'             => $this->basket->getItems(true)
+            'BasketXML'             => $this->basket->getItems(true)
         );
 
         if ($this->card->getCardType() == 'PAYPAL') {
