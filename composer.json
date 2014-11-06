@@ -1,7 +1,7 @@
 {
     "name": "dwmsw/sagepay",
     "type": "library",
-    "description": "Sagepay integration",
+    "description": "Sagepay Direct V3 Wrapper",
     "keywords":  [
         "gateway",
         "merchant",
@@ -12,7 +12,7 @@
         "sagepay"
     ],
     "homepage": "https://github.com/dwmsw/sagepay",
-    "license": "GPLv3",
+    "license": "GPL-3.0",
     "authors": [
         {
             "name": "Daryll Doyle",
@@ -27,7 +27,8 @@
 
     },
     "require-dev": {
-        "phpunit/phpunit": "4.2.*"
+        "phpunit/phpunit": "4.2.*",
+        "codeclimate/php-test-reporter": "dev-master"
     },
     "autoload": {
         "psr-4": {
