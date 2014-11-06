@@ -94,6 +94,16 @@ class Direct extends Shared
         return $this->makeRequest($this->directEndPoints[$this->mode]['register'], $data);
     }
 
+    /**
+     * Release a deferred payment
+     *
+     * @param $VPSTxId
+     * @param $SecurityKey
+     * @param $VendorTxCode
+     * @param $TxAuthNo
+     * @param $ReleaseAmount
+     * @return mixed
+     */
     public function release($VPSTxId, $SecurityKey, $VendorTxCode, $TxAuthNo, $ReleaseAmount)
     {
         $data = array(
@@ -110,6 +120,18 @@ class Direct extends Shared
         return $this->makeRequest($this->directEndPoints[$this->mode]['release'], $data);
     }
 
+    /**
+     * Refund a payment
+     *
+     * @param        $VendorTxCode
+     * @param        $Amount
+     * @param        $RelatedVPSTxId
+     * @param        $RelatedVendorTxCode
+     * @param        $RelatedSecurityKey
+     * @param        $RelatedTxAuthNo
+     * @param string $Description
+     * @return mixed
+     */
     public function refund($VendorTxCode, $Amount, $RelatedVPSTxId, $RelatedVendorTxCode, $RelatedSecurityKey, $RelatedTxAuthNo, $Description = '')
     {
         $data = array(
