@@ -5,6 +5,8 @@
 
 namespace dwmsw\sagepay;
 
+use InvalidArgumentException;
+
 class Shared extends AbstractSettings
 {
 
