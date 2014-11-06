@@ -110,4 +110,23 @@ class Direct extends Shared
         return $this->makeRequest($this->directEndPoints[$this->mode]['release'], $data);
     }
 
+    public function refund($VendorTxCode, $Amount, $RelatedVPSTxId, $RelatedVendorTxCode, $RelatedSecurityKey, $RelatedTxAuthNo, $Description = '')
+    {
+        $data = array(
+            'VPSProtocol'           => $this->protocol,
+            'TxType'                => 'REFUND',
+            'Vendor'                => $this->vendorName,
+            'VendorTxCode'          => $VendorTxCode,
+            'Currency'              => $this->currency,
+            'Description'           => $Description,
+            'RelatedVPSTxId'        => $RelatedVPSTxId,
+            'RelatedVendorTxCode'   => $RelatedVendorTxCode,
+            'RelatedSecurityKey'    => $RelatedSecurityKey,
+            'RelatedTxAuthNo'       => $RelatedTxAuthNo,
+            'Amount'                => number_format($Amount, 2, '.', '')
+        );
+
+        return $this->makeRequest($this->directEndPoints[$this->mode]['refund'], $data, true);
+    }
+
 }
