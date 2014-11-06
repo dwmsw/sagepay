@@ -5,6 +5,7 @@
 
 namespace dwmsw\sagepay;
 
+use InvalidArgumentException;
 
 class Address
 {
