@@ -8,7 +8,28 @@
 
 dwmsw/sagepay is a library for interacting with the [Sagepay Direct v3.00 protocol](http://www.sagepay.co.uk/file/12236/download-document/DIRECT_Integration_and_Protocol_Guidelines_010814.pdf)
 
-It aims to make interacting with Sagepay as easy as possible and when complete will be added as a [composer](https://getcomposer.org/) package on [packagist](https://packagist.org/)
+It aims to make interacting with Sagepay as easy as possible and is available as a [composer](https://getcomposer.org/) package on [packagist](https://packagist.org/packages/dwmsw/sagepay)
+
+This wrapper doesn't include any database implementations, it is purely here to make interacting with the Sagepay API easier and to add a level of validation. 
+All methods that send the data to Sagepay will return the response to you in an associative array, with nothing added or removed.
+
+It has been built this way as to not restrict developers to certain database implementations or structures. We prefer for you to be able to use the data however you like.
+
+##Installation
+
+Installing via composer is the best way, and can be done in one of the following ways:
+
+Add the following to your composer.json file
+```javascript
+{
+    "require-dev": {
+        "dwmsw/sagepay": "dev-master"
+    }
+}
+```
+Run the following from the CLI
+
+`composer require "dwmsw/sagepay=dev-master"`
 
 ## What is implemented?
 
