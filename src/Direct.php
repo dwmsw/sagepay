@@ -22,6 +22,12 @@ class Direct extends Shared
         return $this;
     }
 
+    /**
+     * Register a Payment with Sagepay
+     *
+     * @param $txType
+     * @return mixed
+     */
     public function register($txType)
     {
         if (in_array(strtoupper($txType), $this->validTxTypes)) {
@@ -87,4 +93,21 @@ class Direct extends Shared
 
         return $this->makeRequest($this->directEndPoints[$this->mode]['register'], $data);
     }
+
+    public function release($VPSTxId, $SecurityKey, $VendorTxCode, $TxAuthNo, $ReleaseAmount)
+    {
+        $data = array(
+            'VPSProtocol'        => $this->protocol,
+            'TxType'             => 'RELEASE',
+            'Vendor'             => $this->vendorName,
+            'VendorTxCode'       => $VendorTxCode,
+            'VPSTxId'            => $VPSTxId,
+            'SecurityKey'        => $SecurityKey,
+            'TxAuthNo'           => $TxAuthNo,
+            'Amount'             => number_format($ReleaseAmount, 2, '.', '')
+        );
+
+        return $this->makeRequest($this->directEndPoints[$this->mode]['release'], $data);
+    }
+
 }
