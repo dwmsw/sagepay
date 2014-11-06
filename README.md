@@ -1,5 +1,9 @@
 # dwmsw/sagepay
 
+[![Build Status](https://travis-ci.org/dwmsw/sagepay.svg?branch=master)](https://travis-ci.org/dwmsw/sagepay)
+[![Code Climate](https://codeclimate.com/github/dwmsw/sagepay/badges/gpa.svg)](https://codeclimate.com/github/dwmsw/sagepay)
+[![Test Coverage](https://codeclimate.com/github/dwmsw/sagepay/badges/coverage.svg)](https://codeclimate.com/github/dwmsw/sagepay)
+
 ## Description
 
 dwmsw/sagepay is a library for interacting with the [Sagepay Direct v3.00 protocol](http://www.sagepay.co.uk/file/12236/download-document/DIRECT_Integration_and_Protocol_Guidelines_010814.pdf)
