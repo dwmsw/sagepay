@@ -287,19 +287,24 @@ class Shared extends AbstractSettings
      * @param array $data
      * @return mixed
      */
-    protected function makeRequest($url, array $data)
+    protected function makeRequest($url, array $data, $inURL = false)
     {
         $client = new \GuzzleHttp\Client();
 
-        $response = $client->post($url, [
-            'body' => $data
-        ]);
+        if ($inURL) {
+            $vars =  http_build_query($data);
+            $response = $client->post($url . '?' . $vars);
+        } else {
+            $response = $client->post($url, [
+                'body' => $data
+            ]);
+        }
 
         $output =  explode(PHP_EOL, $response->getBody());
 
         foreach ($output as $out) {
             $parts = explode('=', $out);
-            $this->response[$parts[0]] = $parts[1];
+            $this->response[$parts[0]] = trim($parts[1]);
         }
 
         return $this->response;
