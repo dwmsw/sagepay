@@ -33,7 +33,7 @@ Run the following from the CLI
 
 ## What is implemented?
 
-- Payments
+- Payments (with or without tokens)
 - Deferred Payments w/ release
 - Refunds
 
@@ -83,7 +83,7 @@ $sagepay->setDeliveryAddress($BillingAddress);
 
 // New card instance
 $card = new dwmsw\sagepay\Card();
-// Card details
+// Card details 
 $card->setCardHolder('Mr D Doyle');
 $card->setCardType('VISA');
 $card->setCardNumber('4929000000006');
@@ -97,6 +97,26 @@ $output = $sagepay->register('PAYMENT');
 
 // Do whatever you want with $output
 ```
+
+To use tokens with payments, you'll initially need to pass the following in your setup:
+
+```php
+$sagepay->setCreateToken(1);
+```
+This will tell sagepay to return you a token when payments are successful. You can then use this token, to make further payments.
+
+To make a payment using a token, you don't enter the card details, but instead use the following:
+
+```php
+// New card instance
+$card = new dwmsw\sagepay\Card();
+$card->setToken('TOKEN');
+$card->setCV2('CV2');
+
+$sagepay->setCard($card);
+```
+When using a token, the class automatically sets `StoreToken` to `1` to persist the token. Although I will probably add an option to change this at some point!
+
 
 **DEFERRED**
 
@@ -129,7 +149,6 @@ $output = $sagepay->refund('NEWvendorTxCode', 'AMOUNT TO REFUND', 'OLDVPSTxId', 
 
 ## To Do
 - Payments w/ 3D Secure
-- Tokened Paymens
 - Paypal Integration
 
 ## Getting Involved
