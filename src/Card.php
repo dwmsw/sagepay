@@ -13,44 +13,51 @@ class Card
     /**
      * Cardholder Name
      *
-     * @var
+     * @var string
      */
     protected $CardHolder;
 
     /**
      * Card Number
      *
-     * @var
+     * @var string
      */
     protected $CardNumber;
 
     /**
      * Card Start Date
      *
-     * @var
+     * @var string
      */
     protected $StartDate;
 
     /**
      * Card Expiry Date
      *
-     * @var
+     * @var string
      */
     protected $ExpiryDate;
 
     /**
      * Card CV2
      *
-     * @var
+     * @var string
      */
     protected $CV2;
 
     /**
      * Card Type
      *
-     * @var
+     * @var string
      */
     protected $CardType;
+
+    /**
+     * Sagepay token
+     *
+     * @var string
+     */
+    protected $Token = '';
 
     /**
      * Allowed Card Types
@@ -179,4 +186,25 @@ class Card
         }
     }
 
+    /**
+     * @return string
+     */
+    public function getToken()
+    {
+        return $this->Token;
+    }
+
+    /**
+     * @param string $token
+     */
+    public function setToken($Token)
+    {
+        $this->Token = $Token;
+    }
+
+
+    public function hasToken()
+    {
+        return (empty($this->Token) ? false : true);
+    }
 }
