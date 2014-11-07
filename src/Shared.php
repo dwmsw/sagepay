@@ -282,6 +282,21 @@ class Shared extends AbstractSettings
         $this->card = $card;
     }
 
+    /**
+     * @return int
+     */
+    public function getCreateToken()
+    {
+        return $this->createToken;
+    }
+
+    /**
+     * @param int $createToken
+     */
+    public function setCreateToken($createToken)
+    {
+        $this->createToken = $createToken;
+    }
 
     /**
      * Make a request to sagepay
