@@ -94,58 +94,65 @@ class AbstractSettings
     /**
      * Billing Address
      *
-     * @var
+     * @var Address
      */
     protected $billingAddress;
 
     /**
      * Delivery Addess
      *
-     * @var
+     * @var Address
      */
     protected $deliveryAddress;
 
     /**
      * Transaction Code
      *
-     * @var
+     * @var string
      */
     protected $vendorTxCode;
 
     /**
      * Description of transaction
      *
-     * @var
+     * @var string
      */
     protected $description;
 
     /**
      * The customers email address
      *
-     * @var
+     * @var string
      */
     protected $customerEmail;
 
     /**
      * Whether it's gift aid
      *
-     * @var
+     * @var int
      */
     protected $giftAid;
 
     /**
      * The card to be used
      *
-     * @var
+     * @var Card
      */
     protected $card;
 
     /**
      * Sagepay Response
      *
-     * @var
+     * @var array
      */
     protected $response;
+
+    /**
+     * Whether to create a token or not
+     *
+     * @var int
+     */
+    protected $createToken;
 
     /**
      * An array holding the endpoints available to the Direct API
