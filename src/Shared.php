@@ -320,7 +320,7 @@ class Shared extends AbstractSettings
         $output =  explode(PHP_EOL, $response->getBody());
 
         foreach ($output as $out) {
-            $parts = explode('=', $out);
+            $parts = explode('=', $out, 2);
             $this->response[$parts[0]] = trim($parts[1]);
         }
 

@@ -36,6 +36,7 @@ Run the following from the CLI
 - Payments (with or without tokens)
 - Deferred Payments w/ release
 - Refunds
+- 3D Secure
 
 
 ## Basic Usage
@@ -147,8 +148,18 @@ $output = $sagepay->refund('NEWvendorTxCode', 'AMOUNT TO REFUND', 'OLDVPSTxId', 
 // Do whatever with $output
 ```
 
+**3D Secure**
+
+```php
+// Create instance of Direct
+$sagepay = new dwmsw\sagepay\Direct();
+$sagepay->setConnectionMode('test');
+
+// Send the output back to Sagepay
+$output = $sagepay->threeDResponse($_POST['MD'], $_POST['PaRes']);
+```
+
 ## To Do
-- Payments w/ 3D Secure
 - Paypal Integration
 
 ## Getting Involved
