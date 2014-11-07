@@ -47,14 +47,6 @@ class Direct extends Shared
             'Currency'           => $this->currency,
             'Description'        => $this->description,
 
-            // Card details
-            'CardHolder'         => $this->card->getCardHolder(),
-            'CardNumber'         => $this->card->getCardNumber(),
-            'StartDate'          => ($this->card->getStartDate() ? $this->card->getStartDate() : ''),
-            'ExpiryDate'         => $this->card->getExpiryDate(),
-            'CV2'                => $this->card->getCV2(),
-            'CardType'           => $this->card->getCardType(),
-
             // Address details
             'BillingSurname'     => $this->billingAddress->surname,
             'BillingFirstnames'  => $this->billingAddress->firstnames,
@@ -83,9 +75,26 @@ class Direct extends Shared
             'ApplyAVSCV2'        => $this->applyAvsCv2,
             'Apply3DSecure'      => $this->apply3dSecure,
 
+            'CreateToken'        => $this->getCreateToken(),
+
             // Basket
             'BasketXML'             => $this->basket->getItems(true)
         );
+
+        if ($this->card->hasToken()) {
+            // Token details
+            $data['Token'] = $this->card->getToken();
+            $data['CV2'] = $this->card->getCV2();
+            $data['StoreToken'] = 1;
+        } else {
+            // Card details
+            $data['CardHolder'] = $this->card->getCardHolder();
+            $data['CardNumber'] = $this->card->getCardNumber();
+            $data['StartDate'] = ($this->card->getStartDate() ? $this->card->getStartDate() : '');
+            $data['ExpiryDate'] = $this->card->getExpiryDate();
+            $data['CV2'] = $this->card->getCV2();
+            $data['CardType'] = $this->card->getCardType();
+        }
 
         if ($this->card->getCardType() == 'PAYPAL') {
             $data['PayPalCallbackURL'] = $this->PayPalCallbackURL;

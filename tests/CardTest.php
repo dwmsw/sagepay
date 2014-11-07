@@ -40,4 +40,15 @@ class CardTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('123', $card->getCV2());
     }
 
+    public function testCardToken()
+    {
+        // New card instance
+        $card = new dwmsw\sagepay\Card();
+        // Card details
+        $card->setToken('1234567890abcdefghijklmnopqrstuvwxyz');
+
+        $this->assertTrue($card->hasToken());
+        $this->assertEquals('1234567890abcdefghijklmnopqrstuvwxyz', $card->getToken());
+    }
+
 }
