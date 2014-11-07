@@ -57,7 +57,7 @@ var_dump($output);
 
 /**
  * Below here is a token payment
- * 
+ *
  * This makes the same payment as above, but shows how it can be made with Tokens
  */
 
