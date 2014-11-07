@@ -160,4 +160,23 @@ class Direct extends Shared
         return $this->makeRequest($this->directEndPoints[$this->mode]['refund'], $data, true);
     }
 
+
+    /**
+     * Respond to the 3D secure callback
+     *
+     * @param $MD
+     * @param $PARes
+     * @return mixed
+     */
+    public function threeDResponse($MD, $PARes)
+    {
+        $data = array(
+            'VPSProtocol'   => $this->protocol,
+            'MD'            => $MD,
+            'PARes'         => $PARes
+        );
+
+        return $this->makeRequest($this->directEndPoints[$this->mode]['3dsecure'], $data);
+    }
+
 }
