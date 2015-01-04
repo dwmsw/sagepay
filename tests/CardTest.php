@@ -51,4 +51,69 @@ class CardTest extends PHPUnit_Framework_TestCase
         $this->assertEquals('1234567890abcdefghijklmnopqrstuvwxyz', $card->getToken());
     }
 
+    public function testCv2Exception()
+    {
+        $card = new dwmsw\sagepay\Card();
+
+        try {
+            $card->setCV2(12345);
+        } catch (InvalidArgumentException $e) {
+            return;
+        }
+
+        $this->fail('Allowed an input that was too long');
+    }
+
+    public function testCardHolderException()
+    {
+        $card = new dwmsw\sagepay\Card();
+
+        try {
+            $card->setCardHolder('Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live.');
+        } catch (InvalidArgumentException $e) {
+            return;
+        }
+
+        $this->fail('Allowed an input that was too long');
+    }
+
+    public function testCardNumberException()
+    {
+        $card = new dwmsw\sagepay\Card();
+
+        try {
+            $card->setCardNumber('Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live.');
+        } catch (InvalidArgumentException $e) {
+            return;
+        }
+
+        $this->fail('Allowed an input that was too long');
+    }
+
+    public function testStartDateException()
+    {
+        $card = new dwmsw\sagepay\Card();
+
+        try {
+            $card->setStartDate('44555');
+        } catch (InvalidArgumentException $e) {
+            return;
+        }
+
+        $this->fail('Allowed an input that was too formatted incorrectly');
+    }
+
+    public function testExpiryDateException()
+    {
+        $card = new dwmsw\sagepay\Card();
+
+        try {
+            $card->setExpiryDate('44555');
+        } catch (InvalidArgumentException $e) {
+            return;
+        }
+
+        $this->fail('Allowed an input that was too formatted incorrectly');
+    }
+
 }
