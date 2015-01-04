@@ -37,13 +37,4 @@ class Direct extends Shared
     {
         return $this->txType;
     }
-
-    /**
-     * Returns all variables set in $this
-     * @return object $this
-     */
-    public function dumpAll()
-    {
-        return $this;
-    }
 }
