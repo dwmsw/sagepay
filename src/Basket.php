@@ -32,7 +32,7 @@ class Basket
      */
     public function addItem(Item $item) 
     {
-        $items[] = $item;
+        $this->items[] = $item;
     }
 
     /**
