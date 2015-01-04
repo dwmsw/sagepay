@@ -6,6 +6,8 @@
 
 namespace dwmsw\sagepay;
 
+use InvalidArgumentException;
+
 class AbstractSettings
 {
 
@@ -39,10 +41,8 @@ class AbstractSettings
 
     /**
      * The basket items to be passed to Sagepay
-     *
-     * @var array
      */
-    protected $basket = array();
+    protected $basket;
 
     /**
      * The mode of connection to the API
@@ -92,41 +92,105 @@ class AbstractSettings
     protected $apply3dSecure = 0;
 
     /**
+     * Billing Address
+     *
+     * @var Address
+     */
+    protected $billingAddress;
+
+    /**
+     * Delivery Addess
+     *
+     * @var Address
+     */
+    protected $deliveryAddress;
+
+    /**
+     * Transaction Code
+     *
+     * @var string
+     */
+    protected $vendorTxCode;
+
+    /**
+     * Description of transaction
+     *
+     * @var string
+     */
+    protected $description;
+
+    /**
+     * The customers email address
+     *
+     * @var string
+     */
+    protected $customerEmail;
+
+    /**
+     * Whether it's gift aid
+     *
+     * @var int
+     */
+    protected $giftAid;
+
+    /**
+     * The card to be used
+     *
+     * @var Card
+     */
+    protected $card;
+
+    /**
+     * Sagepay Response
+     *
+     * @var array
+     */
+    protected $response;
+
+    /**
+     * Whether to create a token or not
+     *
+     * @var int
+     */
+    protected $createToken;
+
+    /**
      * An array holding the endpoints available to the Direct API
      *
      * @var array
      */
     protected $directEndPoints = array(
-            'live' => array(
-                'register'  => 'https://live.sagepay.com/gateway/service/vspdirect-register.vsp',
-                '3dsecure'  => 'https://live.sagepay.com/gateway/service/direct3dcallback.vsp',
-                'abort'     => 'https://live.sagepay.com/gateway/service/abort.vsp',
-                'authorise' => 'https://live.sagepay.com/gateway/service/authorise.vsp',
-                'cancel'    => 'https://live.sagepay.com/gateway/service/cancel.vsp',
-                'refund'    => 'https://live.sagepay.com/gateway/service/refund.vsp',
-                'release'   => 'https://live.sagepay.com/gateway/service/release.vsp',
-                'repeat'    => 'https://live.sagepay.com/gateway/service/repeat.vsp',
-                'void'      => 'https://live.sagepay.com/gateway/service/void.vsp',
-                'complete'  => 'https://live.sagepay.com/gateway/service/complete.vsp'
-            ),
-            'test' => array(
-                'register'  => 'https://test.sagepay.com/gateway/service/vspdirect-register.vsp',
-                '3dsecure'  => 'https://test.sagepay.com/gateway/service/direct3dcallback.vsp',
-                'abort'     => 'https://test.sagepay.com/gateway/service/abort.vsp',
-                'authorise' => 'https://test.sagepay.com/gateway/service/authorise.vsp',
-                'cancel'    => 'https://test.sagepay.com/gateway/service/cancel.vsp',
-                'refund'    => 'https://test.sagepay.com/gateway/service/refund.vsp',
-                'release'   => 'https://test.sagepay.com/gateway/service/release.vsp',
-                'repeat'    => 'https://test.sagepay.com/gateway/service/repeat.vsp',
-                'void'      => 'https://test.sagepay.com/gateway/service/void.vsp',
-                'complete'  => 'https://test.sagepay.com/gateway/service/complete.vsp'
-            ),
-        );
+        'live' => array(
+            'register'  => 'https://live.sagepay.com/gateway/service/vspdirect-register.vsp',
+            '3dsecure'  => 'https://live.sagepay.com/gateway/service/direct3dcallback.vsp',
+            'abort'     => 'https://live.sagepay.com/gateway/service/abort.vsp',
+            'authorise' => 'https://live.sagepay.com/gateway/service/authorise.vsp',
+            'cancel'    => 'https://live.sagepay.com/gateway/service/cancel.vsp',
+            'refund'    => 'https://live.sagepay.com/gateway/service/refund.vsp',
+            'release'   => 'https://live.sagepay.com/gateway/service/release.vsp',
+            'repeat'    => 'https://live.sagepay.com/gateway/service/repeat.vsp',
+            'void'      => 'https://live.sagepay.com/gateway/service/void.vsp',
+            'complete'  => 'https://live.sagepay.com/gateway/service/complete.vsp'
+        ),
+        'test' => array(
+            'register'  => 'https://test.sagepay.com/gateway/service/vspdirect-register.vsp',
+            '3dsecure'  => 'https://test.sagepay.com/gateway/service/direct3dcallback.vsp',
+            'abort'     => 'https://test.sagepay.com/gateway/service/abort.vsp',
+            'authorise' => 'https://test.sagepay.com/gateway/service/authorise.vsp',
+            'cancel'    => 'https://test.sagepay.com/gateway/service/cancel.vsp',
+            'refund'    => 'https://test.sagepay.com/gateway/service/refund.vsp',
+            'release'   => 'https://test.sagepay.com/gateway/service/release.vsp',
+            'repeat'    => 'https://test.sagepay.com/gateway/service/repeat.vsp',
+            'void'      => 'https://test.sagepay.com/gateway/service/void.vsp',
+            'complete'  => 'https://test.sagepay.com/gateway/service/complete.vsp'
+        ),
+    );
 
     /**
      * Timeout limit for cURL requests
-     * 
+     *
      * @var integer
      */
     protected $timeOut = 30;
+
 }

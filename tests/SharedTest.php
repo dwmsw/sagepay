@@ -122,6 +122,41 @@ class SharedTest extends PHPUnit_Framework_TestCase
         $apply3dSecure = $shared->getApply3dSecure();
 
         $this->assertEquals($apply3dSecure, 2);
-        
+    }
+
+    public function testVendorTxCode()
+    {
+        $shared = new dwmsw\sagepay\Shared();
+
+        $shared->setVendorTxCode('12345');
+
+        $this->assertEquals('12345', $shared->getVendorTxCode());
+    }
+
+    public function testDescription()
+    {
+        $shared = new dwmsw\sagepay\Shared();
+
+        $shared->setDescription('12345');
+
+        $this->assertEquals('12345', $shared->getDescription());
+    }
+
+    public function testEmail()
+    {
+        $shared = new dwmsw\sagepay\Shared();
+
+        $shared->setCustomerEmail('test@test.test');
+
+        $this->assertEquals('test@test.test', $shared->getCustomerEmail());
+    }
+
+    public function testGiftAid()
+    {
+        $shared = new dwmsw\sagepay\Shared();
+
+        $shared->setGiftAid(1);
+
+        $this->assertEquals(1, $shared->getGiftAid());
     }
 }

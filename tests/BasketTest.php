@@ -2,56 +2,43 @@
 
 class BasketTest extends PHPUnit_Framework_TestCase
 {
-    private $basket;
 
-    public function setUp()
+    public function testAddToBasket()
     {
-        $this->basket = new dwmsw\sagepay\Basket();
+        $basket = new dwmsw\sagepay\Basket();
+        $basket->addItem(new dwmsw\sagepay\Item('Test Item', 30.00, 6, 1));
+        $amount = $basket->getAmount();
+
+        $this->assertEquals($amount, 36);
     }
 
-    public function testDeliveryNetAmount()
+    public function testAddToBasketMultiple()
     {
-        $this->basket->setDeliveryNetAmount(3.00);
+        $basket = new dwmsw\sagepay\Basket();
+        $basket->addItem(new dwmsw\sagepay\Item('Test Item', 30.00, 6, 1));
+        $basket->addItem(new dwmsw\sagepay\Item('Test Item', 30.00, 6, 2));
+        $amount = $basket->getAmount();
 
-        $amount = $this->basket->getDeliveryNetAmount();
-
-        $this->assertEquals(3.00, $amount);
+        $this->assertEquals($amount, 108);
     }
 
-    public function testDeliveryTaxAmount()
+    public function testFailureWithDifferentNodeNames()
     {
-        $this->basket->setDeliveryTaxAmount(.6);
+        $basket = new dwmsw\sagepay\Basket();
+        $basket->addItem(new dwmsw\sagepay\Item('Test Item', 30.00, 6, 1));
+        $output = $basket->getItems(true);
 
-        $amount = $this->basket->getDeliveryTaxAmount();
+        $expected = '<basket>
+                      <item>
+                        <description>Test Item</description>
+                        <quantity>1</quantity>
+                        <unitNetAmount>30.00</unitNetAmount>
+                        <unitTaxAmount>6.00</unitTaxAmount>
+                        <unitGrossAmount>36.00</unitGrossAmount>
+                        <totalGrossAmount>36.00</totalGrossAmount>
+                      </item>
+                    </basket>';
+        $this->assertXmlStringEqualsXmlString($expected, $output);
 
-        $this->assertEquals(0.60, $amount);
-    }
-
-    public function testDeliveryGrossAmount()
-    {
-        $this->basket->setDeliveryNetAmount(3.00);
-        $this->basket->setDeliveryTaxAmount(.6);
-
-        $amount = $this->basket->getDeliveryGrossAmount();
-
-        $this->assertEquals(3.60, $amount);
-    }
-
-    public function testItems()
-    {
-        $this->basket->setDeliveryNetAmount(3.00);
-        $this->basket->setDeliveryTaxAmount(.6);
-
-        $item = new dwmsw\sagepay\Item();
-        $item->setDescription('Test Item');
-        $item->setQuantity(1);
-        $item->setUnitNetAmount(2.00);
-        $item->setUnitTaxAmount(.4);
-
-        $this->basket->addItem($item);
-
-        $amount = $this->basket->getAmount();
-
-        $this->assertEquals(6.00, $amount);
     }
 }

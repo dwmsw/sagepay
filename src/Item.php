@@ -33,7 +33,7 @@ class Item
      *
      * @var integer
      */
-    private $quantity = 0;
+    private $quantity;
 
     /**
      * The cost of the item before tax
@@ -63,6 +63,25 @@ class Item
      */
     private $totalGrossAmount;
 
+
+    /**
+     * Construct
+     * @param string  $description   Item Description
+     * @param float  $unitNetAmount Net Item Amount
+     * @param float  $unitTaxAmount Tax Item Amount
+     * @param integer $quantity      Number of items
+     * @param boolean $productCode   The products Code
+     * @param boolean $productSku    The product SKU
+     */
+    function __construct($description, $unitNetAmount, $unitTaxAmount, $quantity = 1, $productCode = false, $productSku = false) 
+    {
+        $this->description   = $description;
+        $this->unitNetAmount = $unitNetAmount;
+        $this->unitTaxAmount = $unitTaxAmount;
+        $this->quantity      = $quantity;
+        $this->productCode   = $productCode;
+        $this->productSku    = $productSku;
+    }
 
     /**
      * Get description
