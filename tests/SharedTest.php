@@ -27,6 +27,18 @@ class SharedTest extends PHPUnit_Framework_TestCase
         
     }
 
+    public function testGetConnectionMode()
+    {
+        $shared = new dwmsw\sagepay\Shared();
+
+        $shared->setConnectionMode('test');
+
+        $connection = $shared->getConnectionMode();
+
+        $this->assertEquals('test', $connection);
+
+    }
+
     public function testVendorName()
     {
         $shared = new dwmsw\sagepay\Shared();
