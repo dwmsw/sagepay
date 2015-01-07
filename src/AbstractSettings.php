@@ -6,8 +6,6 @@
 
 namespace dwmsw\sagepay;
 
-use InvalidArgumentException;
-
 class AbstractSettings
 {
 
@@ -170,7 +168,8 @@ class AbstractSettings
             'release'   => 'https://live.sagepay.com/gateway/service/release.vsp',
             'repeat'    => 'https://live.sagepay.com/gateway/service/repeat.vsp',
             'void'      => 'https://live.sagepay.com/gateway/service/void.vsp',
-            'complete'  => 'https://live.sagepay.com/gateway/service/complete.vsp'
+            'complete'  => 'https://live.sagepay.com/gateway/service/complete.vsp',
+            'removeToken'  => 'https://live.sagepay.com/gateway/service/removetoken.vsp',
         ),
         'test' => array(
             'register'  => 'https://test.sagepay.com/gateway/service/vspdirect-register.vsp',
@@ -182,7 +181,8 @@ class AbstractSettings
             'release'   => 'https://test.sagepay.com/gateway/service/release.vsp',
             'repeat'    => 'https://test.sagepay.com/gateway/service/repeat.vsp',
             'void'      => 'https://test.sagepay.com/gateway/service/void.vsp',
-            'complete'  => 'https://test.sagepay.com/gateway/service/complete.vsp'
+            'complete'  => 'https://test.sagepay.com/gateway/service/complete.vsp',
+            'removeToken'  => 'https://test.sagepay.com/gateway/service/removetoken.vsp',
         ),
     );
 
