@@ -207,7 +207,7 @@ class Direct extends Shared
             'Amount'                => number_format($Amount, 2, '.', '')
         );
 
-        return $this->makeRequest($this->directEndPoints[$this->mode]['release'], $data);
+        return $this->makeRequest($this->directEndPoints[$this->mode]['authorise'], $data);
     }
 
 }
