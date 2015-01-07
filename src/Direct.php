@@ -179,4 +179,35 @@ class Direct extends Shared
         return $this->makeRequest($this->directEndPoints[$this->mode]['3dsecure'], $data);
     }
 
+    /**
+     * Authorise an Authenticated or Registered payment
+     *
+     * @param        $VendorTxCode
+     * @param        $Amount
+     * @param        $RelatedVPSTxId
+     * @param        $RelatedVendorTxCode
+     * @param        $RelatedSecurityKey
+     * @param        $RelatedTxAuthNo
+     * @param string $Description
+     * @return mixed
+     */
+    public function authorise($VendorTxCode, $Amount, $RelatedVPSTxId, $RelatedVendorTxCode, $RelatedSecurityKey, $RelatedTxAuthNo, $Description = '')
+    {
+        $data = array(
+            'VPSProtocol'           => $this->protocol,
+            'TxType'                => 'AUTHORISE',
+            'Vendor'                => $this->vendorName,
+            'VendorTxCode'          => $VendorTxCode,
+            'Description'           => $Description,
+            'RelatedVPSTxId'        => $RelatedVPSTxId,
+            'RelatedVendorTxCode'   => $RelatedVendorTxCode,
+            'RelatedSecurityKey'    => $RelatedSecurityKey,
+            'RelatedTxAuthNo'       => $RelatedTxAuthNo,
+            'ApplyAVSCV2'           => $this->getApplyAvsCv2(),
+            'Amount'                => number_format($Amount, 2, '.', '')
+        );
+
+        return $this->makeRequest($this->directEndPoints[$this->mode]['release'], $data);
+    }
+
 }
