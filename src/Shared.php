@@ -313,7 +313,7 @@ class Shared extends AbstractSettings
             $response = $client->post($url . '?' . $vars);
         } else {
             $response = $client->post($url, [
-                'body' => $data
+                'form_params' => $data
             ]);
         }
 
