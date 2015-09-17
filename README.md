@@ -17,24 +17,15 @@ It has been built this way as to not restrict developers to certain database imp
 
 ##Installation
 
-Installing via composer is the best way, and can be done in one of the following ways:
+Installing via composer is the best way. Run the following from the CLI
 
-Add the following to your composer.json file
-```javascript
-{
-    "require-dev": {
-        "dwmsw/sagepay": "dev-master"
-    }
-}
-```
-Run the following from the CLI
-
-`composer require "dwmsw/sagepay=dev-master"`
+`composer require dwmsw/sagepay`
 
 ## What is implemented?
 
 - Payments (with or without tokens)
 - Deferred Payments w/ release
+- Discounts
 - Refunds
 - 3D Secure
 
@@ -53,6 +44,9 @@ $basket = new dwmsw\sagepay\Basket();
 $basket->addItem(new dwmsw\sagepay\Item('Test Item', 30.00, 6, 1));
 // Add another item to the basket
 $basket->addItem(new dwmsw\sagepay\Item('Test Item Two', 30.00, 6, 2));
+// Add a discount
+$basket->addDiscount(new dwmsw\sagepay\Discount(50.00, 'This is a discount'));
+
 // Set the Basket
 $sagepay->setBasket($basket);
 
