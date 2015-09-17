@@ -90,4 +90,30 @@ class BasketTest extends PHPUnit_Framework_TestCase
         $this->assertXmlStringEqualsXmlString($expected, $output);
 
     }
+
+    public function testBasketWithDiscounts()
+    {
+        $basket = new dwmsw\sagepay\Basket();
+        $basket->addItem(new dwmsw\sagepay\Item('Test Item', 30.00, 6, 1));
+        $basket->addDiscount(new dwmsw\sagepay\Discount(12.00, 'This is a discount'));
+        $output = $basket->getItems(true);
+
+        $expected = '<basket>
+                      <item>
+                        <description>Test Item</description>
+                        <quantity>1</quantity>
+                        <unitNetAmount>30.00</unitNetAmount>
+                        <unitTaxAmount>6.00</unitTaxAmount>
+                        <unitGrossAmount>36.00</unitGrossAmount>
+                        <totalGrossAmount>36.00</totalGrossAmount>
+                      </item>
+                      <discounts>
+                        <discount>
+                          <fixed>12.00</fixed>
+                          <description>This is a discount</description>
+                        </discount>
+                      </discounts>
+                    </basket>';
+        $this->assertXmlStringEqualsXmlString($expected, $output);
+    }
 }

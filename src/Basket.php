@@ -14,6 +14,12 @@ class Basket
     protected $items = array();
 
     /**
+     * Array to hold discounts
+     * @var array
+     */
+    protected $discounts = array();
+
+    /**
      * Delivery tax amount
      * @var float
      */
@@ -30,9 +36,19 @@ class Basket
      *
      * @param Item $item
      */
-    public function addItem(Item $item) 
+    public function addItem(Item $item)
     {
         $this->items[] = $item;
+    }
+
+    /**
+     * Add the discount to the basket
+     *
+     * @param Discount $discount
+     */
+    public function addDiscount(Discount $discount)
+    {
+        $this->discounts[] = $discount;
     }
 
     /**
@@ -93,20 +109,39 @@ class Basket
     public function getAmount()
     {
         $amount = $this->getDeliveryGrossAmount();
-        foreach ($this->items as $item)
-        {
+        foreach ($this->items as $item) {
             $amount += $item->getTotalGrossAmount();
+        }
+
+        foreach ($this->getDiscounts() as $discount) {
+            $amount -= $discount->getAmount();
         }
         return $amount;
     }
 
+    /**
+     * Get items from the basket
+     *
+     * @param bool|false $xml
+     * @return array|string
+     */
     public function getItems($xml = false)
-    {   
+    {
         if ($xml === false) {
             return $this->items;
         } else {
             return $this->toXml();
         }
+    }
+
+    /**
+     * Get discounts from the basket
+     *
+     * @return array
+     */
+    public function getDiscounts()
+    {
+        return $this->discounts;
     }
 
     /**
@@ -141,6 +176,23 @@ class Basket
 
             if ($tmp = $item->getProductCode()) {
                 $node->appendChild($dom->createElement('productCode', $tmp));
+            }
+
+            $dom->documentElement->appendChild($node);
+        }
+
+        if (count($this->getDiscounts()) > 0) {
+
+            $node = $dom->createElement('discounts');
+
+            foreach ($this->getDiscounts() as $discount) {
+
+                $dis = $dom->createElement('discount');
+
+                $dis->appendChild($dom->createElement('fixed', number_format($discount->getAmount(), 2, '.', '')));
+                $dis->appendChild($dom->createElement('description', $discount->getDescription()));
+
+                $node->appendChild($dis);
             }
 
             $dom->documentElement->appendChild($node);
