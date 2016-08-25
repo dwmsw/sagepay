@@ -17,4 +17,21 @@ class Token extends Shared
 
         return $this->makeRequest($this->directEndPoints[$this->mode]['removeToken'], $data);
     }
+
+    public function create(Card $card)
+    {
+        $data = array(
+            'VPSProtocol' => $this->protocol,
+            'TxType' => 'TOKEN',
+            'Vendor' => $this->getVendorName(),
+            'Curency' => $this->currency,
+            'CardHolder' => $card->getCardHolder(),
+            'CardNumber' => $card->getCardNumber(),
+            'ExpiryDate' => $card->getExpiryDate(),
+            'CV2' => $card->getCV2(),
+            'CardType' => $card->getCardType(),
+        );
+
+        return $this->makeRequest($this->directEndPoints[$this->mode]['createToken'], $data);
+    }
 }

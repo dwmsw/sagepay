@@ -170,6 +170,7 @@ class AbstractSettings
             'void'      => 'https://live.sagepay.com/gateway/service/void.vsp',
             'complete'  => 'https://live.sagepay.com/gateway/service/complete.vsp',
             'removeToken'  => 'https://live.sagepay.com/gateway/service/removetoken.vsp',
+            'createToken'  => 'https://live.sagepay.com/gateway/service/directtoken.vsp',
         ),
         'test' => array(
             'register'  => 'https://test.sagepay.com/gateway/service/vspdirect-register.vsp',
@@ -183,6 +184,7 @@ class AbstractSettings
             'void'      => 'https://test.sagepay.com/gateway/service/void.vsp',
             'complete'  => 'https://test.sagepay.com/gateway/service/complete.vsp',
             'removeToken'  => 'https://test.sagepay.com/gateway/service/removetoken.vsp',
+            'createToken'  => 'https://test.sagepay.com/gateway/service/directtoken.vsp',
         ),
     );
 
