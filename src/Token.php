@@ -24,7 +24,7 @@ class Token extends Shared
             'VPSProtocol' => $this->protocol,
             'TxType' => 'TOKEN',
             'Vendor' => $this->getVendorName(),
-            'Curency' => $this->currency,
+            'Currency' => $this->currency,
             'CardHolder' => $card->getCardHolder(),
             'CardNumber' => $card->getCardNumber(),
             'ExpiryDate' => $card->getExpiryDate(),
