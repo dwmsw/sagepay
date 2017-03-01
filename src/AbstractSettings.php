@@ -150,7 +150,35 @@ class AbstractSettings
      *
      * @var int
      */
-    protected $createToken;
+    protected $createToken; 
+
+    /**
+     * For Repeat Payment, the vendorTXCode of the last authed payment
+     *
+     * @var string
+     */
+    protected $relatedVendorTxCode;
+
+    /**
+     * For Repeat Payment, the security key returned from the last authed payment
+     *
+     * @var string
+     */
+    protected $relatedSecurityKey;
+
+    /**
+     * For Repeat Payment, the transaction auth number returned from the last authed payment
+     *
+     * @var string
+     */
+    protected $relatedTxAuthNo;
+
+    /**
+     * For Repeat Payment, the VPS transaction ID returned from the last authed payment
+     *
+     * @var string
+     */
+    protected $relatedVPSTxId;
 
     /**
      * An array holding the endpoints available to the Direct API
