@@ -104,6 +104,70 @@ class Direct extends Shared
     }
 
     /**
+     * Repeat/Recurring Payment with Sagepay
+     *
+     * @return mixed
+     */
+    public function repeat()
+    {
+        $data = array(
+            'VPSProtocol'        => $this->protocol,
+            'TxType'             => "REPEAT",
+            'Vendor'             => $this->vendorName,
+            'VendorTxCode'       => $this->vendorTxCode,
+            'Amount'             => number_format($this->basket->getAmount(), 2, '.', ''),
+            'Currency'           => $this->currency,
+            'Description'        => $this->description,
+            'RelatedSecurityKey' => $this->relatedSecurityKey,
+            'RelatedVendorTxCode' => $this->relatedVendorTxCode,
+            'RelatedTxAuthNo'     => $this->relatedTxAuthNo,
+            'RelatedVPSTxId'      => $this->relatedVPSTxId,
+
+            // A few settings
+            'CustomerEmail'      => $this->customerEmail,
+            'GiftAidPayment'     => $this->giftAid,
+            'AccountType'        => $this->accountType,
+            //'ClientIPAddress'    => ($ip == '::1' ? '127.0.0.1' : $ip),
+            'ApplyAVSCV2'        => $this->applyAvsCv2,
+            'Apply3DSecure'      => $this->apply3dSecure,
+
+            'CreateToken'        => $this->getCreateToken(),
+
+            // Basket
+            'BasketXML'             => $this->basket->getItems(true)
+          );
+
+          if (isset($this->billingAddress)) {
+              $addressFields = array(
+                // Address details
+                'BillingSurname'     => $this->billingAddress->surname,
+                'BillingFirstnames'  => $this->billingAddress->firstnames,
+                'BillingAddress1'    => $this->billingAddress->address1,
+                'BillingAddress2'    => ($this->billingAddress->address2 ? $this->billingAddress->address2 : ''),
+                'BillingCity'        => $this->billingAddress->city,
+                'BillingPostCode'    => $this->billingAddress->postcode,
+                'BillingCountry'     => $this->billingAddress->country,
+                'BillingState'       => ($this->billingAddress->state ? $this->billingAddress->state : ''),
+                'BillingPhone'       => $this->billingAddress->phone,
+                'DeliverySurname'    => $this->deliveryAddress->surname,
+                'DeliveryFirstnames' => $this->deliveryAddress->firstnames,
+                'DeliveryAddress1'   => $this->deliveryAddress->address1,
+                'DeliveryAddress2'   => ($this->deliveryAddress->address2 ? $this->deliveryAddress->address2 : ''),
+                'DeliveryCity'       => $this->deliveryAddress->city,
+                'DeliveryPostCode'   => $this->deliveryAddress->postcode,
+                'DeliveryCountry'    => $this->deliveryAddress->country,
+                'DeliveryState'      => ($this->deliveryAddress->state ? $this->deliveryAddress->state : ''),
+                'DeliveryPhone'      => $this->deliveryAddress->phone,
+              );
+              foreach($addressFields as $key => $val) {
+                $data[$key] = $val;
+              }
+          }
+
+        return $this->makeRequest($this->directEndPoints[$this->mode]['repeat'], $data);
+    }
+
+    /**
      * Release a deferred payment
      *
      * @param $VPSTxId

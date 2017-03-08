@@ -327,4 +327,45 @@ class Shared extends AbstractSettings
         return $this->response;
     }
 
+    /**
+     * Set RelatedVendorTxCode
+     *
+     * @param string $
+     */
+    public function setRelatedVendorTxCode ($relatedVendorTxCode)
+    {
+        $this->relatedVendorTxCode = $relatedVendorTxCode;
+    }
+
+    /**
+     * Set RelatedSecurityKey
+     *
+     * @param string $
+     */
+    public function setRelatedSecurityKey ($relatedSecurityKey )
+    {
+        $this->relatedSecurityKey  = $relatedSecurityKey ;
+    }
+
+    /**
+     * Set RelatedTxAuthNo
+     *
+     * @param string $
+     */
+    public function setRelatedTxAuthNo ($relatedTxAuthNo  )
+    {
+        $this->relatedTxAuthNo   = $relatedTxAuthNo  ;
+    }
+
+
+    /**
+     * Set RelatedVPSTxId
+     *
+     * @param string $
+     */
+    public function setRelatedVPSTxId ($relatedVPSTxId  )
+    {
+          $this->relatedVPSTxId   = $relatedVPSTxId;
+    }
+
 }
