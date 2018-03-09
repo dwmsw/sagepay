@@ -100,6 +100,31 @@ class SharedTest extends PHPUnit_Framework_TestCase
         
     }
 
+    public function testSetAccountTypeException()
+    {
+        $shared = new dwmsw\sagepay\Shared();
+
+        try {
+           $shared->setAccountType("XXXX");
+        } catch (InvalidArgumentException $expected) {
+            return;
+        }
+
+        $this->fail('An expected exception has not been raised.');
+    }
+
+    public function testSetAccountType()
+    {
+        $shared = new dwmsw\sagepay\Shared();
+
+        $return = $shared->setAccountType("C");
+
+        $accountType = $shared->getAccountType();
+
+        $this->assertEquals($accountType, "C");
+
+    }
+
     public function testSetApply3dSecureException()
     {
         $shared = new dwmsw\sagepay\Shared();
