@@ -109,6 +109,30 @@ class Shared extends AbstractSettings
     }
 
     /**
+     * Get value of Account Type
+     *
+     * @return string  Account Type option
+     */
+    public function getAccountType()
+    {
+        return $this->accountType;
+    }
+
+    /**
+     * Set value of Account Type
+     *
+     * @param int $applyAvsCv2 Apply AVS/CV2 validation option
+     */
+    public function setAccountType($accountType)
+    {
+        if (in_array($accountType, ["E", "M", "C"])) {
+            $this->accountType = $accountType;
+        } else {
+            throw new InvalidArgumentException("Invalid AccountType value, [\"E\", \"M\", \"C\"] expected, " . $accountType . " given");
+        }
+    }
+
+    /**
      * Get value of 3D Secure Verification option
      *
      * @return int  3D Secure Verification option
